@@ -44,7 +44,7 @@ def after_request(response):
 def register():
     form = forms.RegisterForm()
     if form.validate_on_submit():
-        flash("Yay, you registered!", "success")
+        flash("Registered successfully", "success")
         models.User.create_user(
             username=form.username.data,
             email=form.email.data,
@@ -65,7 +65,7 @@ def login():
         else:
             if check_password_hash(user.password, form.password.data):
                 login_user(user)
-                flash("You've been logged in!", "success")
+                flash("You are logged in", "success")
                 return redirect(url_for('index'))
             else:
                 flash("Your email or password doesn't match!", "error")
@@ -82,7 +82,10 @@ def logout():
 
 @app.route('/')
 def index():
-    return render_template('home.html')
+    if models.User.is_anonymous:
+        return redirect(url_for('login'))
+    else:
+        return render_template('home.html')
 
 
 @app.errorhandler(404)

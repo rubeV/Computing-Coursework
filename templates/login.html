@@ -1,12 +1,18 @@
 {% extends "base.html" %}
 {% from 'macros.html' import render_field %}
+{% block title %}POP | Login {% endblock %}
 
+{% block header %}<a class="link" href="{{ url_for('register') }}"  title="Register">Register </a>{% endblock %}
 {% block content %}
 <form method="POST" action="" class="form">
     {{ form.hidden_tag() }}
     {% for field in form %}
-        {{ render_field(field) }}
+            <div class="row mb-3">
+            {{ render_field(field) }}
+            </div>
     {% endfor %}
-    <button type="submit" id="submit">Login!</button>
+    <button class="big-button" type="submit" id="submit">Login!</button>
 </form>
+
+
 {% endblock %}

@@ -1,5 +1,5 @@
 from flask_wtf import Form
-from wtforms import StringField, PasswordField, TextAreaField
+from wtforms import StringField, PasswordField, TextAreaField, IntegerField
 from wtforms.validators import (DataRequired, Regexp, ValidationError, Email, Length, EqualTo, email_validator)
 
 from models import User
@@ -34,6 +34,12 @@ class RegisterForm(Form):
 
             email_exists
         ])
+    fplID = IntegerField(
+        'FPL Team ID',
+        validators=[
+            DataRequired(),
+        ]
+    )
     password = PasswordField(
         'Password',
         validators=[
