@@ -1,6 +1,98 @@
 {% extends "base.html" %}
 
+{% block css %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/CSS/pop.css">
+{% endblock %}
+
+{% block header %}
+    <ul class="nav justify-content-end" id="nav">
+  <li class="nav-item">
+    <a class="nav-link" href="{{ url_for('psychic') }}">Psychic</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{ url_for('omniscient') }}">Omniscient</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{ url_for('practical') }}">Practical</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" a href="{{ url_for('logout') }}">Logout</a>
+  </li>
+</ul>
+{% endblock %}
+
 
 {% block content %}
-    <h1> hi alL </h1>
+    <div class="container-xxl">
+        <div class="row">
+            <div class="col top">
+            <figure class="text-center">
+              <blockquote class="blockquote">
+                <p>"There are lots of poets in football but they don't win titles"</p>
+              </blockquote>
+              <figcaption class="blockquote-footer">
+                 Jose Mourinho
+              </figcaption>
+            </figure>
+         </div>
+        </div>
+        <div class="row">
+            <div class="col twoone">
+            </div>
+            <div class="col-8 txtdes">
+            Many Fantasy Premier League Players will choose their team base on intuition and instinct but they rarely
+                win, in fact the number one spot has never been claimed without the use of rigorous statistical analysis
+                and planning. This is what is necessary in order to play the odds and come out on top, but is this what
+                is fun? For some maybe, but for most not at all and it probably is not viable for those who just want to
+                make their transfer on their way to work, set their captain at the beginning of the week or choose a
+                formation on their lunch break. FPL POP does all the analysis so you don't have to, winning your work
+                mini-league has never been easier all you have to do is register with your team ID and POP will
+                recommend your transfers for the week saving you from looking at numbers any more than you already have
+                to.
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8 txtdes">
+                <span class="head"> <h4>Psychic</h4></span>
+              <span class="bod">  The number one aim of any fantasy player is to accumulate as many points as possible over a season.
+                This is a daunting task seeing as no one can predict the future, but our statistical models take in
+                all manner of inputs in order to give you an accurate and reliable assessment of how much a certain
+                player will score in the coming gameweeks. So instead of shooting in the dark you can be reassured
+                that picking the top players will yield many points in the long run.
+                  </span>
+            </div>
+            <div class="col threetwo">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col fourone ">
+
+            </div>
+            <div class="col-8 txtdes">
+               <span class="head"> <h4>Omniscient</h4> </span>
+                <span class="bod"> knowing the players that are most likely to return points isn't enough to win your minileague. FPL
+                requires planning and working with a restricted transfer budget. On this page you will find a fixture
+                ticker showing upcoming fixture difficulty and double gameweeks to help you plan as well as tailored
+                transfer recommendations that work for your team value. </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8 txtdes">
+              <span class="head">  <h4>Practical</h4> </span>
+               <span class="bod"> What the point of POP be if it wasn't easy to use? Our mission is simply to save you time while
+                increasing your FPL points, a win-win! Instead of spending hours trawling through different sites and
+                apps to looks at statistics and fixture analysis you can simply find the best transfer for your team in
+                two clicks because we do all the heavy lifting. </span>
+            </div>
+            <div class="col fivetwo">
+
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script src="/static/scripts/Navbar.js"></script>
 {% endblock %}

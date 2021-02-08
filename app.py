@@ -80,12 +80,36 @@ def logout():
     return redirect(url_for('index'))
 
 
+@app.route('/home')
+def home():
+    return render_template('home.html')
+
+
+@app.route('/psychic')
+def psychic():
+    return render_template('psychic.html')
+
+
+@app.route('/omniscient')
+def omniscient():
+    return render_template('omniscient.html')
+
+
+@app.route('/practical')
+def practical():
+    return render_template('practical.html')
+
+
+
+
+
+
 @app.route('/')
 def index():
-    if models.User.is_anonymous:
-        return redirect(url_for('login'))
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
     else:
-        return render_template('home.html')
+        return redirect(url_for('login'))
 
 
 @app.errorhandler(404)

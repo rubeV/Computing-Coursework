@@ -1,0 +1,123 @@
+header{
+    background-color: black;
+}
+.nav {
+    top: 0;
+    transition: top 0.4s;
+    position: fixed;
+}
+
+.top{
+    background-image: url("/static/images/jose.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 50px;
+}
+.container {
+    width: 100%;
+}
+
+p {
+    color: #ebebeb;
+}
+
+
+
+
+
+.twoone {
+    background-image: url("/static/images/transPL.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 250px;
+    display: flex;
+    transition: transform .5s;
+}
+
+
+.twoone:hover{
+    transform: scale(1.4);
+}
+
+
+.threetwo {
+    background-image: url("/static/images/nostra.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 250px;
+    display: flex;
+    transition: transform .5s;
+}
+
+
+.threetwo:hover{
+    transform: scale(1.1);
+}
+
+.fourone {
+    background-image: url("/static/images/guar.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 250px;
+    display: flex;
+    transition: transform .5s;
+}
+
+
+.fourone:hover{
+    transform: scale(1.1);
+}
+.fivetwo {
+    background-image: url("/static/images/salah.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 250px;
+    display: flex;
+    transition: transform .5s;
+}
+
+
+.fivetwo:hover{
+    transform: scale(1.1);
+}
+
+.txtdes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    vertical-align: top;
+    float-displace: block;
+    transition: 1s ease-in-out;
+    -webkit-transition: 1s ease-in-out;
+}
+
+.txtdes .bod { display: none; }
+.txtdes:hover .head { display: none;  }
+.txtdes:hover .bod { display: inline;}
+
+.row {
+    padding-bottom: 40px;
+}
+
+.notification {
+  text-align: center;
+  padding: 10px 20px;
+  border-radius: 4px;
+  color: #fff;
+}
+.success {
+  background: #70DA8B;
+  color: #4DA463;
+}
+.error {
+  background: #FFE6B2;
+  color: #C5A14E;
+  margin-bottom: 20px;
+}
