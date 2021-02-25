@@ -1,10 +1,65 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %}POP | Omniscient {% endblock %}
+{% block css %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/CSS/pop.css">
+{% endblock %}
 
-</body>
-</html>
+{% block header %}
+    <ul class="nav justify-content-end" id="nav">
+  <li class="nav-item">
+    <a class="nav-link" href="{{ url_for('psychic') }}">Psychic</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{ url_for('practical') }}">Practical</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" a href="{{ url_for('logout') }}">Logout</a>
+  </li>
+</ul>
+{% endblock %}
+
+
+{% block content %}
+    <table id="main-table" class="table table-dark table-hover table-bordered border-white">
+        <thead>
+            <tr>
+                <th colspan="2"></th>
+                <th colspan="6" class="border-2">Threat</th>
+                <th colspan="4" class="border-2">Creativity</th>
+                <th colspan="2" class="border-2">FPL</th>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <th onclick="sortTable(0)" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Cost">£M</th>
+                <th onclick="sortTable(1)" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Shots">S</th>
+                <th onclick="sortTable(2)" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Shots on target">OT</th>
+                <th onclick="sortTable(3)" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Shots in the box">In</th>
+                <th onclick="sortTable(4)" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Big Chances">BC</th>
+                <th onclick="sortTable(5)" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Expected Goals">xG</th>
+                <th onclick="sortTable(6)" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Goals">G</th>
+                <th onclick="sortTable(7)" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Key Passes">KP</th>
+                <th onclick="sortTable(8)" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Big Chances Created">BCC</th>
+                <th onclick="sortTable(9)" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Expected Assists">xA</th>
+                <th onclick="sortTable(10)" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Assists">A</th>
+                <th onclick="sortTable(11)" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Actual   Points">Points</th>
+                <th onclick="sortTable(12)" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Projected Points">Projected</th>
+            </tr>
+        </thead>
+
+
+    </table>
+
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script src="/static/Scripts/Navbar.js"></script>
+    <script src="/static/Scripts/CSV-parse.js"></script>
+    <script src="/static/Scripts/table-sort.js"></script>
+{%  endblock %}

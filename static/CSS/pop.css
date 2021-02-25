@@ -94,8 +94,8 @@ p {
     text-align: left;
     vertical-align: top;
     float-displace: block;
-    transition: 1s ease-in-out;
-    -webkit-transition: 1s ease-in-out;
+    transition: head 1s ease-in-out;
+    -webkit-transition: head 1s ease-in-out;
 }
 
 .txtdes .bod { display: none; }
@@ -121,3 +121,10 @@ p {
   color: #C5A14E;
   margin-bottom: 20px;
 }
+
+.hidden{
+    display: none;
+}
+
+
+
