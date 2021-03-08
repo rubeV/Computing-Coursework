@@ -1,3 +1,4 @@
+document.addEventListener('DOMContentLoaded', () => alert("DOM ready after defer!"));
 function sortTable(n) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
   table = document.getElementById("main-table");

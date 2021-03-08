@@ -4,6 +4,7 @@ from flask_login import (LoginManager, login_user, logout_user, login_required, 
 
 import forms
 import models
+import algorithm
 
 DEBUG = True
 PORT = 8000
@@ -118,6 +119,7 @@ def not_found(error):
 
 
 models.initialize()
+algorithm.update_csv()
 
 
 if __name__ == '__main__':

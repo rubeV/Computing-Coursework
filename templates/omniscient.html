@@ -31,6 +31,7 @@
                 <th colspan="6" class="border-2">Threat</th>
                 <th colspan="4" class="border-2">Creativity</th>
                 <th colspan="2" class="border-2">FPL</th>
+                <th colspan="1"></th>
             </tr>
             <tr>
                 <th>Name</th>
@@ -47,6 +48,7 @@
                 <th onclick="sortTable(10)" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Assists">A</th>
                 <th onclick="sortTable(11)" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Actual   Points">Points</th>
                 <th onclick="sortTable(12)" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Projected Points">Projected</th>
+                <th onclick="sortTable(13)" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Fixture Difficulty">FDR</th>
             </tr>
         </thead>
 
@@ -61,5 +63,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
     <script src="/static/Scripts/Navbar.js"></script>
     <script src="/static/Scripts/CSV-parse.js"></script>
-    <script src="/static/Scripts/table-sort.js"></script>
+    <script defer src="/static/Scripts/table-sort.js"></script>
 {%  endblock %}
