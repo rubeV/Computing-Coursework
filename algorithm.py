@@ -113,7 +113,7 @@ def update_csv():
         points = round(points, 1)
         df.loc[index, "predicted"] = points
         df.to_csv(path_or_buf='C:/Users/ruben/Computing Coursework/static/Data/POP.csv', index=False, header=False, encoding='utf-8-sig')
-        print(find_stat(row["name"], "predicted"))
+
 
 
 

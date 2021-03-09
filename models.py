@@ -1,4 +1,5 @@
 import datetime
+from playhouse.migrate import *
 
 from flask_bcrypt import generate_password_hash
 from flask_login import UserMixin
@@ -14,6 +15,7 @@ DATABASE = SqliteDatabase(db_path)
 class User(UserMixin, Model):
     username = CharField(unique=True)
     email = CharField(unique=True)
+    fplID = IntegerField(default=000000)
     password = CharField(max_length=100)
     joined_at = DateTimeField(default=datetime.datetime.now)
     is_admin = BooleanField(default=False)
@@ -23,12 +25,13 @@ class User(UserMixin, Model):
         order_by = ('-joined_at',)
 
     @classmethod
-    def create_user(cls, username, email, password, admin=False):
+    def create_user(cls, username, email, fplID, password, admin=False):
         try:
             with DATABASE.transaction():
                 cls.create(
                     username=username,
                     email=email,
+                    fplID=fplID,
                     password=generate_password_hash(password),
                     is_admin=admin)
         except IntegrityError:
@@ -37,5 +40,6 @@ class User(UserMixin, Model):
 
 def initialize():
     DATABASE.connect()
+    print("connected")
     DATABASE.create_tables([User], safe=True)
     DATABASE.close()

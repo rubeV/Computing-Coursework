@@ -5,6 +5,7 @@ from flask_login import (LoginManager, login_user, logout_user, login_required, 
 import forms
 import models
 import algorithm
+import recommendation
 
 DEBUG = True
 PORT = 8000
@@ -20,6 +21,7 @@ login_manager.login_view = 'login'
 
 @login_manager.user_loader
 def load_user(userid):
+    """To look up user"""
     try:
         return models.User.get(models.User.id == userid)
     except models.DoesNotExist:
@@ -49,6 +51,7 @@ def register():
         models.User.create_user(
             username=form.username.data,
             email=form.email.data,
+            fplID=form.fplID.data,
             password=form.password.data
         )
         return redirect(url_for('index'))
@@ -98,6 +101,7 @@ def omniscient():
 
 @app.route('/practical')
 def practical():
+    print(recommendation.recommend())
     return render_template('practical.html')
 
 
@@ -122,16 +126,17 @@ models.initialize()
 algorithm.update_csv()
 
 
+
 if __name__ == '__main__':
     print("running")
-    models.initialize()
-    try:
-        models.User.create_user(
-            username='Rube',
-            email='Rube@fpl.com',
-            password='password',
-            admin=True
-        )
-    except ValueError:
-        pass
-    app.run(debug=DEBUG, host=HOST, port=PORT)
+
+
+
+
+
+
+
+
+
+
+
