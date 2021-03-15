@@ -24,6 +24,9 @@
 
 
 {% block content %}
+    {% for player in rec1 %}
+        <p class="text-center text-decoration-underline text-info" >transfer {{ player[0] }} for {{ player[1] }}</p>
+    {% endfor %}
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
     <script src="/static/scripts/Navbar.js"></script>

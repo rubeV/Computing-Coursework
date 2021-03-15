@@ -101,8 +101,8 @@ def omniscient():
 
 @app.route('/practical')
 def practical():
-    print(recommendation.recommend())
-    return render_template('practical.html')
+    rec = recommendation.recommend()
+    return render_template('practical.html', rec1=rec)
 
 
 

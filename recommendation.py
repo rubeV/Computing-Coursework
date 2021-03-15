@@ -1,8 +1,6 @@
 import datetime
 import csv
 import pandas as pd
-from pip._internal.commands.list import tabulate
-
 import models
 from fpl import fpl, FPL
 import asyncio
@@ -14,6 +12,7 @@ os.environ["EMAIL"]="ruben.varghese@ymail.com"
 os.environ["PASSWORD"]="Pokemon456"
 os.environ["USER_IS"]="819877"
 
+
 def get_teamid():
     user = models.User.get(models.User.username == 'rv2')
     user_fplID = user.fplID
@@ -24,7 +23,7 @@ def get_teamid():
 
 # access the fpl api to get current team
 async def update(email, password, user_id):
-    async with aiohttp.ClientSession() as session:
+    async with aiohttp.ClientSession(trust_env=True) as session:
         fpl = FPL(session)
         await fpl.login(email, password)
         user = await fpl.get_user(user_id)
@@ -42,8 +41,8 @@ async def update(email, password, user_id):
         picked_players = []
         for player in players:
             p = await fpl.get_player(player, return_json=True)
-            picked_players.append(p)
-        picked_players = pd.DataFrame(picked_players)
+            k = str(p["web_name"])+" "+str(p["element_type"])+" "+str(p["team"])
+            picked_players.append(k)
     return picked_players
 
 
@@ -68,87 +67,125 @@ def find_pp(name):
                     break
 
 
-# change name format
-def change_name(row):
-    x = row[0]
-    if row[1] == "Goalkeeper":
-        x += "(G)"
-    if row[1]=="Defender":
-        x += "(D)"
-    if row[1]=="Midfielder":
-        x += "(M)"
-    if row[1]=="Forward":
-        x += "(F)"
-    if row[2]=="Man City":
-        x += "(MCI)"
-    if row[2]=="Man Utd":
-        x += "(MUN)"
-    if row[2]=="Leicster":
-        x += "(LEI)"
-    if row[2]=="Chelsea":
-        x += "(CHE)"
-    if row[2]=="West Ham":
-        x += "(WHU)"
-    if row[2]=="Everton":
-        x += "(EVE)"
-    if row[2]=="Spurs":
-        x += "(THS)"
-    if row[2]=="Liverpool":
-        x += "(LIV)"
-    if row[2]=="Aston Villa":
-        x += "(AVL)"
-    if row[2]=="Arsenal":
-        x += "(ARS)"
-    if row[2]=="Leeds":
-        x += "(LEE)"
-    if row[2]=="Wolves":
-        x += "(WOL)"
-    if row[2]=="Crystal Palace":
-        x += "(CPL)"
-    if row[2]=="Southampton":
-        x += "(SOU)"
-    if row[2]=="Burnley":
-        x += "(BUR)"
-    if row[2]=="Newcastle":
-        x += "(NEW)"
-    if row[2]=="Brighton":
-        x += "(BHA)"
-    if row[2]=="Fulham":
-        x += "(FUL)"
-    if row[2]=="West Brom":
-        x += "(WBA)"
-    if row[2]=="Sheffield":
-        x += "(SHU)"
-    return x
+# change name format to access data on current team from pop csv
+def change_name(player):
+    num_list = [int(i) for i in player.split() if i.isdigit()]
+    player1 = ''.join([i for i in player if not i.isdigit()])
+    if num_list[0] == 1:
+        player1 += "(G)"
+    if num_list[0] == 2:
+        player1 += "(D)"
+    if num_list[0] == 3:
+        player1 += "(M)"
+    if num_list[0] == 4:
+        player1 += "(F)"
+    if num_list[1] == 12:
+        player1 += "(MCI)"
+    if num_list[1] == 13:
+        player1 += "(MUN)"
+    if num_list[1] == 9:
+        player1 += "(LEI)"
+    if num_list[1] == 5:
+        player1 += "(CHE)"
+    if num_list[1] == 19:
+        player1 += "(WHU)"
+    if num_list[1] == 7:
+        player1 += "(EVE)"
+    if num_list[1] == 17:
+        player1 += "(THS)"
+    if num_list[1] == 11:
+        player1 += "(LIV)"
+    if num_list[1] == 2:
+        player1 += "(AVL)"
+    if num_list[1] == 1:
+        player1 += "(ARS)"
+    if num_list[1] == 10:
+        player1 += "(LEE)"
+    if num_list[1] == 20:
+        player1 += "(WOL)"
+    if num_list[1] == 6:
+        player1 += "(CPL)"
+    if num_list[1] == 16:
+        player1 += "(SOU)"
+    if num_list[1] == 4:
+        player1 += "(BUR)"
+    if num_list[1] == 14:
+        player1 += "(NEW)"
+    if num_list[1] == 3:
+        player1 += "(BHA)"
+    if num_list[1] == 8:
+        player1 += "(FUL)"
+    if num_list[1] == 18:
+        player1 += "(WBA)"
+    if num_list[1] == 15:
+        player1 += "(SHU)"
+    player1 = player1.replace(" ", "")
+    return player1
+
 
 # get predicted points of team
 def pp_current():
     email=os.environ.get('EMAIL')
     password=os.environ.get('PASSWORD')
     user_id=os.environ.get('USER_ID')
-    df = asyncio.run(update(email, password,user_id))
-    df_list = df.values.tolist()
-    print(df_list)
+    player_list = asyncio.run(update(email, password,user_id))
     points_list = []
-    for list in df_list:
-        x = list[0]
-        points = find_pp(change_name(list))
-        if list[1] == "Goalkeeper":
-            x += "(G)"
-            points_list.append(x, points)
-        if list[1] == "Defender":
-            x += "(D)"
-            points_list.append(x, points)
-        if list[1] == "Midfielder":
-            x += "(M)"
-            points_list.append(x, points)
-        if list[1] == "Forward":
-            x += "(F)"
-            points_list.append(x, points)
+    for player in player_list:
+        player1 = change_name(player)
+        points = find_pp(player1)
+        points_list.append((player1, points))
     return points_list
 
 
-# gets the player in each postion with the highest predicted score
+# gets the player in each position in the user's team with the lowest predicted score
+def get_lowest(points_list):
+    lowest_gk = 0
+    lowest_df = 0
+    lowest_mid = 0
+    lowest_fwd = 0
+    lowest_gk_name = ""
+    lowest_df_name = ""
+    lowest_mid_name = ""
+    lowest_fwd_name = ""
+    lowest = []
+    for player in points_list:
+        if player[1] is None:
+            continue
+        if "(G)" in player[0]:
+            if lowest_gk == 0:
+                lowest_gk = player[1]
+                lowest_gk_name = player[0]
+            if player[1] < lowest_gk:
+                lowest_gk = player[1]
+                lowest_gk_name = player[0]
+        if "(D)" in player[0]:
+            if lowest_df == 0:
+                lowest_df = player[1]
+                lowest_df_name = player[0]
+            if player[1] < lowest_df:
+                lowest_df = player[0]
+                lowest_df_name = player[0]
+        if "(M)" in player[0]:
+            if lowest_mid == 0:
+                lowest_mid = player[1]
+                lowest_mid_name = player[0]
+            if player[1] < lowest_mid:
+                lowest_mid = player[0]
+                lowest_mid_name = player[0]
+        if "(F)" in player[0]:
+            if lowest_fwd == 0:
+                lowest_fwd = player[1]
+                lowest_fwd_name = player[0]
+            if player[1] > lowest_fwd:
+                lowest_fwd = player[0]
+                lowest_fwd_name = player[0]
+    lowest.append(lowest_gk_name)
+    lowest.append(lowest_df_name)
+    lowest.append(lowest_mid_name)
+    lowest.append(lowest_fwd_name)
+    return lowest
+
+# gets the player in each position with the highest predicted score
 def get_highest():
     col_name = ["name", "cost", "s", "ot", "in", "BC", "xG", "G", "KP", "BCC", "xA", "A", "Pts", "predicted", "AFDR"]
     df = pd.read_csv('C:/Users/ruben/Computing Coursework/static/Data/POP.csv', names=col_name, encoding='utf-8-sig')
@@ -181,12 +218,33 @@ def get_highest():
             highest.append(row["name"])
     return highest
 
+
+# compares team to highest predicted points players
 def recommend():
     rec = []
     points_list = pp_current()
+    print(points_list)
+    low_list = get_lowest(points_list)
+    print(get_lowest(points_list))
     highest = get_highest()
-    for i in points_list:
-        for j in highest:
-            if i == j:
-                highest.remove(j)
-    return highest
+    for p1 in points_list:
+        for p2 in highest:
+            if p1[0] == p2:
+                highest.remove(p2)
+    print(highest)
+    for low in low_list:
+        for player in highest:
+            if "(G)" in low:
+                if "G" in player:
+                    rec.append((low, player))
+            if "(D)" in low:
+                if "(D)" in player:
+                    rec.append((low, player))
+            if "(M)" in low:
+                if "(M)" in player:
+                    rec.append((low, player))
+            if "(F)" in low:
+                if "(F)" in player:
+                    rec.append((low, player))
+    print(rec)
+    return rec
